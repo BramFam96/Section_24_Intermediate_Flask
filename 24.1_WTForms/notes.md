@@ -250,8 +250,11 @@ Also our type specified fields are already type validated
 ```py
 @app.route('/employees/<int:id>/edit', methods=["GET", "POST"])
 def edit_employee(id):
+    # Get the emp we specified:
     emp = Employee.query.get_or_404(id)
+    # pass the emp to form to populate data:
     form = EmployeeForm(obj=emp)
+    # We still need to provide an iterable to dept_code
     depts = db.session.query(Department.dept_code, Department.dept_name)
     form.dept_code.choices = depts
 
@@ -264,4 +267,16 @@ def edit_employee(id):
     else:
         return render_template("edit_employee_form.html", form=form)
 
+```
+## Styling
+---
+We use *class_*
+```py
+{{field(class_='text-primary')}}
+```
+## Testing
+---
+For tests to work on POST routes we need to disable CSRF checking;
+```py
+app.config['WTF_CSRF_ENABLED'] = False
 ```
