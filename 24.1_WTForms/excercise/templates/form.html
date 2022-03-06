@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+<!--  -->
+{% block title %} {% if pet %}
+<h1 class="display-1 text-center">Update {{pet.name}}</h1>
+{% else %}
+<h1 class="display-1 text-center">Add a Pet</h1>
+{% endif %} {% endblock %}
+<!--  -->
+{% block content %}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<form method="POST">
+				{{ form.hidden_tag() }}
+				<!--  -->
+				{% if pet %}
+				<!--  -->
+				{{form.name.label(class_="text-info")}} {{form.name(class_="form-control
+				form-control-lg", value = pet.name)}}
+				<!--  -->
+				{{form.species.label(class_="text-info")}}
+				{{form.species(class_="form-control", value = pet.specie)}}
+				<!--  -->
+				{{form.photo_url.label(class_="text-info")}}
+				{{form.photo_url(class_="form-control", value = pet.photo())}}
+				<!--  -->
+				{{form.age.label(class_="text-info")}} {{form.age(class_="form-control",
+				value = pet.age)}}
+				<!--  -->
+				{{form.notes.label(class_="text-info")}} {{form.notes(class_="form-control",
+				value = pet.notes)}}
+				<!--  -->
+				{{form.available.label(class_="text-info")}}
+				{{form.available(class_="form-control", value = pet.available)}}
+				<!--  -->
+				{% else %}
+				<!--  -->
+				{% for field in form if field.widget.input_type != 'hidden'%}
+				<div class="form-group">
+					{{field.label}}
+					<!--  -->
+					{{field(class_="form-control")}}
+					<!--  -->
+					<span>
+						{% for err in field.errors %}
+						<small class="form-text text-danger"> {{err}} </small>
+						{% endfor %}
+					</span>
+				</div>
+				{% endfor %} {% endif %} {% if pet %}
+				<button class="btn btn-success btn-lg">Update</button>
+				{% else %}
+				<button class="btn btn-success btn-lg">Add</button>
+				{% endif %}
+				<a href="/" class="btn btn-danger btn-lg">Go Back</a>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
