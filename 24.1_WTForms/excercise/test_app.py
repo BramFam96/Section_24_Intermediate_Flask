@@ -66,17 +66,14 @@ class PetViewTestCase(TestCase):
     
     # Test post routes
 
-    # def test_post_add_pet(self):
-        # with app.test_client(self) as client:
-                        
-        #     # with app.app_context():
-        #     #     pet = Pet(name= 'Test2', species = 'cat')
-        #     #     form = AddPetForm(formdata=None, obj=pet )
-        #     resp = client.post("/add", data = dict(name = 'giner', species = 'cat'), follow_redirects = True)
-        #     html = resp.get_data(as_text=True)
+    def test_post_add_pet(self):
+        with app.test_client(self) as client:
+            p ={'name': 'ginger', 'species':'cat'}
+            resp = client.post("/add", data = p, follow_redirects = True)
+            html = resp.get_data(as_text=True)
 
-    #         self.assertEqual(resp.status_code, 200)
-    #         self.assertIn('fgdfdg', html)
+            self.assertEqual(resp.status_code, 200)
+            self.assertIn('fgdfdg', html)
     # def test_user_edit(self):
     #     with app.test_client() as client:
     #         resp = client.post(
