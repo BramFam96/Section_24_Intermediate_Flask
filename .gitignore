@@ -2,5 +2,5 @@
 24.1_WTForms/simple_example/__pycache__
 24.1_WTForms/demo/flask-wtforms-demo/__pycache__
 24.1_WTForms/excercise/__pycache__
-24.2_apis/venv
-24.2_apis/notes/mapquest_demo/secret.py
+24.2_api_requests/venv
+24.2_external_apis/flask-ext-apis-demo/VideoCode/secrets.py
