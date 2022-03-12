@@ -1,0 +1,1 @@
+mq_key = 'YVxl7gA8iAwUGeTljonsosRUPMmUcp0c'
