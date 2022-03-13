@@ -10,7 +10,7 @@ app.config['SECRET_KEY'] = "oh-so-secret"
 
 connect_db(app)
 
-
+# Regular route!
 @app.route('/')
 def index_page():
     """Renders html template that includes some JS - NOT PART OF JSON API!"""
