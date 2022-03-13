@@ -1,0 +1,7 @@
+flask
+sqlalchemy
+flask-sqlalchemy
+ipython
+psycopg2-binary
+Jinja2
+Werkzeug

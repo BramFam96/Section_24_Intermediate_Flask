@@ -1,0 +1,12 @@
+* {
+	box-sizing: border-box;
+}
+#cupcake-list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 1rem;
+}
+img {
+  height:200px;
+  width:150px;
+}

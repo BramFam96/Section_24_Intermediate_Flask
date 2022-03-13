@@ -111,13 +111,13 @@ resource = f'{URL}/resource'
 ---
 
 - **GET/snacks**
-  - Should be 200 OK, JSON describing snacks
+  - Should return 200 OK, JSON describing snacks
 - **GET/snacks/[id]**
-  - Should be 200 OK, JSON describing single snack
+  - Should return 200 OK, JSON describing single snack
 - **POST/snacks**
-  - Should be 201 CREATED, JSON describing new snack
+  - Should return 201 CREATED, JSON describing new snack
 - **PUT or PATCH /snacks[id]**
-  - Should be 200 OK, JSON describing updated snack
+  - Should return 200 OK, JSON describing updated snack
 
 ## Nested Routes
 
