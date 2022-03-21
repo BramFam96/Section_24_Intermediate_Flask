@@ -50,7 +50,7 @@ def delete_tweet(id):
     if tweet.user_id == session['user_id']:
         db.session.delete(tweet)
         db.session.commit()
-        flash("Tweet deleted!", "success")
+        flash("Tweet deleted!", "info")
     else:
         flash("You don't have permission to do that!", "danger")
     return redirect('/tweets')

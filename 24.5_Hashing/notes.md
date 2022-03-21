@@ -1,15 +1,6 @@
-# Goals
-
-- Define hashing
-- Implement authentication and authorization in flask with **Bcrypt**
-  - _authorization and authentication are different_
-
-Ultimately: build and application with authorization and authentication
-
 ## TOC
 
 - [Goals](#goals)
-  - [TOC](#toc)
   - [Auth v Auth!](#auth-v-auth)
     - [Horrible no good authentication](#horrible-no-good-authentication)
   - [Hashing](#hashing)
@@ -28,8 +19,17 @@ Ultimately: build and application with authorization and authentication
     - [2. Logic in view functions:](#2-logic-in-view-functions)
     - [User priveleges](#user-priveleges)
     - [Gating a page](#gating-a-page)
-  - [### Delete Permissions](#-delete-permissions)
+    - [Delete Permissions](#delete-permissions)
     - [Errors](#errors)
+
+---
+
+# Goals
+
+- Define hashing
+- Implement authentication and authorization in flask with **Bcrypt**
+  - _authorization and authentication are different_
+- Integrate this functionality into apps
 
 ---
 
@@ -245,12 +245,12 @@ A salt is a random string we add to our data _prior_ to hashing
 
 Once we do this, we have a salted hash;
 
-'''py
+```py
 salt = 'asd321asd4312'
 pw = 'example'
 hash(f'{pw}{salt}')
 When comparing to db we pass in salt
-'''
+```
 
 ---
 
@@ -527,26 +527,30 @@ To send a post route ww hide a button in the nav-link:
 		</button>
 	</form>
 </li>
-```  
----
-### Delete Permissions
----
-Two parter:  
-1. Render delete button based on user id - [tweets](flask-hashing-login-demo/VideoCode/auth_demo/templates/tweets.html)
-```html
-  <h5 class="card-title text-info">
-        {{tweet.user.username}}
-        {% if session['user_id'] == tweet.user_id %}
-        <form style="display:inline;" action="/tweets/{{tweet.id}}" method="POST">
-          <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
-        </form>
-        {% endif %}
-      </h5>
-      <h6 class="card-subtitle mb-2 text-muted">Date goes here</h6>
-      <p class="card-text">
-        {{tweet.text}}
-      </p>
 ```
+
+---
+
+### Delete Permissions
+
+---
+
+Two parter:
+
+1. Render delete button based on user id - [tweets](flask-hashing-login-demo/VideoCode/auth_demo/templates/tweets.html)
+
+```html
+<h5 class="card-title text-info">
+	{{tweet.user.username}} {% if session['user_id'] == tweet.user_id %}
+	<form style="display:inline;" action="/tweets/{{tweet.id}}" method="POST">
+		<button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+	</form>
+	{% endif %}
+</h5>
+<h6 class="card-subtitle mb-2 text-muted">Date goes here</h6>
+<p class="card-text">{{tweet.text}}</p>
+```
+
 2. Gate the delete route to protect against unauth reqs
 
 ```py
@@ -565,12 +569,17 @@ def delete_tweet(id):
         flash("You don't have permission to do that!", "danger")
     return redirect('/tweets')
 ```
+
 ### Errors
-If we pass a username in that has been taken we get:  
+
+If we pass a username in that has been taken we get:
+
 ```py
 sqlalchemy.exc.IntegrityError
 ```
+
 To handle this we can import it, and raise an exception!
+
 ```py
 from sqlalchemy.exc import IntegrityError
 
